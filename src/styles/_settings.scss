@@ -1,0 +1,21 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-image: $primary-bcg-image;
+    font-family: $font-family-main;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+li {
+    list-style-type: none;
+}
+
+button {
+    outline: none;
+    cursor: pointer;
+}
