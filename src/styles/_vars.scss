@@ -1,12 +1,17 @@
 $font-family-main: "OpenSans", sans-serif;
 $font-family-header: "RedFive";
-$content-width: 1200px;
+$content-width: 1085px;
 $container-offset: 15px;
 $container-width: $content-width + ($container-offset * 2);
 
 // background colors
-$primary-bcg-color: #110f0f;
+// $primary-bcg-color: #110f0f;
 $primary-bcg-image: url('../resources/img/space-wallpaper.jpeg');
+
+//nav
+$disabled-nav-color: #B2B3BF;
+$active-nav-color: #C5A95D;
+$hover-nav-color: #C5A95D;
 
 //@media
 $big-laptop: 1200px;

@@ -1,0 +1,33 @@
+@import '../../styles/vars';
+
+.header {
+    padding-top: 51px;
+    margin-bottom: 67px;
+
+    &__container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+
+    &__item {
+        font-size: 2rem;
+        color: $disabled-nav-color;
+        transition: .2s;
+        cursor: pointer;
+        &--active {
+            color: $active-nav-color;
+        }
+    }
+    &__item:hover {
+        color: $hover-nav-color;
+    }
+    &__item:not(:last-child) {
+        margin-right: 27px;
+    }
+}
