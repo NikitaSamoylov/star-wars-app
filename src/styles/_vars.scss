@@ -8,10 +8,29 @@ $container-width: $content-width + ($container-offset * 2);
 // $primary-bcg-color: #110f0f;
 $primary-bcg-image: url('../resources/img/space-wallpaper.jpeg');
 
+//button
+$button-bg-color: #C5A95D;
+$btn-font-size: 1.2rem;
+
 //nav
 $disabled-nav-color: #B2B3BF;
 $active-nav-color: #C5A95D;
 $hover-nav-color: #C5A95D;
+
+//error message
+$error-message-color: #C5A95D;
+$error-message-size: 2.2rem;
+
+//cards-people
+$card-info-color: #1e1d24;
+$card-name-color: #C5A95D;
+$card-name-size: 2.2rem;
+$card-specific-info-color: #1e1d24;
+
+//specific info
+$specific-info-title-size: 2.2rem;
+$specific-info-tittle-color: #C5A95D;
+$paragraph-size: 1.4rem;
 
 //@media
 $big-laptop: 1200px;

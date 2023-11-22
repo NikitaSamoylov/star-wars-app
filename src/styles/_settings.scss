@@ -8,9 +8,13 @@
 body {
     margin: 0 auto;
     background-image: $primary-bcg-image;
-    font-family: $font-family-main;
+    background-attachment: fixed;
+    -webkit-background-attachment: fixed;
+    background-position: top center;
     background-repeat: no-repeat;
     background-size: cover;
+    font-family: $font-family-main;
+    color: #e7e6e6;
 }
 
 .container {
@@ -25,4 +29,8 @@ li {
 button {
     outline: none;
     cursor: pointer;
+}
+
+h3 {
+    font-size: 1.8rem;
 }

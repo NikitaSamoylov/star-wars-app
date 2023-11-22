@@ -14,7 +14,7 @@ class AppServices {
                 name: data.name,
                 image: `https://starwars-visualguide.com/assets/img/characters/${data.url.match(/[0-9]/gm).join('')}.jpg`,
             }
-        })
+        }).splice(0, 9)
     }
 
     // formPeopleData = (peopleData) => {

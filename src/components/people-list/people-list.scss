@@ -1,0 +1,25 @@
+@import '../../styles/vars';
+
+.main-info {
+
+    &__all {
+        max-width: 650px;
+    }
+    &__container {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+    &__specific-info {
+        padding: 27px 25px 35px 27px;
+        background-color: $card-specific-info-color;
+        border-radius: 10px;
+    }
+}
+
+.people-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    // grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 25px;
+}
