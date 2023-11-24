@@ -14,7 +14,10 @@ class PeopleList extends Component {
             data: [],
             loading: true,
             error: false,
-        }
+            currentPerson: [],
+            currentPersonLoading: true,
+            loadingMessage: 'Choose the person from left'
+        };
     }
 
     peopleListResponse = new AppServices()
@@ -33,25 +36,43 @@ class PeopleList extends Component {
     }
 
     renderElements = (data) => {
-        this.setState({data, loading: false},)
+        this.setState({data, loading: false})
     }
 
-    clickItem = (id) => {
-        console.log(id)
+    choosePerson = (id) => {
+        this.setState (
+            {
+                currentPersonLoading: true,
+                loadingMessage: 'Intergalactic search has begun',
+            }
+        )
+        this.peopleListResponse.getPersonInfo(id)
+        .then(this.renderCurrentPerson)
+    }
+
+    renderCurrentPerson = (currentPerson) => {
+        this.setState(
+            {
+                currentPerson,
+                currentPersonLoading: false,
+                loadingMessage: 'The character found, try another one',
+            }
+            )
     }
 
     render() {
-        const elements = this.state.data.map((elem) => {
+        const {data, loading, error, loadingMessage, currentPerson, currentPersonLoading} = this.state;
+        const elements = data.map((elem) => {
             const id = elem.image.match(/[0-9]/gm).join('');
             return <PeopleItem
                             key={id}
                             name={elem.name}
                             image={elem.image}
-                            clickItem={() => this.clickItem(id)}
+                            clickItem={() => this.choosePerson(id)}
                             />
         })
-        const spinner = this.state.loading ? <Preloader/> : null;
-        const isError = this.state.error ? <OnError/> : null;
+        const spinner = loading ? <Preloader/> : null;
+        const isError = error ? <OnError/> : null;
 
         return (
             <section className="main-info">
@@ -63,7 +84,15 @@ class PeopleList extends Component {
                             {elements}
                         </ul>
                     </div>
-                    {spinner || isError ? null : <PersonInfo />}
+                    <div className="main-info-right-block">
+                        {spinner || isError
+                                            ? null
+                                            : <h3 className="main-info-right-title">{loadingMessage}</h3>}
+                        {spinner || isError
+                                            ? null
+                                            : <PersonInfo data={currentPerson}
+                                                            currentPersonLoading={currentPersonLoading} />}
+                    </div>
                 </div>
             </section>
         )
