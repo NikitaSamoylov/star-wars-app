@@ -14,4 +14,20 @@
     &:hover {
         color: #e7e6e6;
     }
+
+    &--card {
+        display: block;
+        margin: 0 auto;
+        font-size: calc($btn-font-size + 4px);
+        padding: 12px 28px;
+
+        &:disabled {
+            background-color: grey;
+            cursor: default;
+
+            &:hover {
+                color: darkgrey;
+            }
+        }
+    }
 }

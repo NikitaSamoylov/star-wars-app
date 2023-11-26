@@ -8,8 +8,8 @@ class AppServices {
         return await res.json();
     }
 
-    getPeopleData = async () => {
-        const finishedData = await this.getResources('https://swapi.dev/api/people/');
+    getPeopleData = async (page=1) => {
+        const finishedData = await this.getResources(`https://swapi.dev/api/people/?page=${page}`);
         return finishedData.results.map((data) => {
             return {
                 name: data.name,
@@ -19,7 +19,7 @@ class AppServices {
     }
 
     getPersonInfo = async (id) => {
-        const finishedData = await this.getResources(`https://wapi.dev/api/people/${id}`);
+        const finishedData = await this.getResources(`https://swapi.dev/api/people/${id}`);
         let newFilmArr = [];
         for (let personData of finishedData.films) {
             let fetchData = await this.getResources(personData)

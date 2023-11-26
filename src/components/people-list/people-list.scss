@@ -1,6 +1,7 @@
 @import '../../styles/vars';
 
 .main-info {
+    padding-top: 95px;
 
     &__all {
         max-width: 650px;
@@ -22,6 +23,7 @@
     grid-template-columns: repeat(3, 1fr);
     // grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 25px;
+    margin-bottom: 20px;
 }
 
 .main-info-right-title {
@@ -30,4 +32,8 @@
     margin-bottom: 15px;
     color: #7e7e7e;
     padding-left: 27px;
+}
+
+.main-info-right-block {
+    position: sticky;
 }

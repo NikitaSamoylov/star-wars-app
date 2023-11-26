@@ -1,7 +1,11 @@
 @import '../../styles/vars';
 
 .header {
-    margin-bottom: 67px;
+    position: fixed;
+    z-index: 4;
+    width: 100%;
+    padding-top: 51px;
+    padding-bottom: 21px;
 
     &__container {
         display: flex;

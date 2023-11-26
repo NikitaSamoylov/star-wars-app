@@ -1,12 +1,12 @@
 @import '../../styles/vars';
 
 .error-message {
-    position: relative;
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: $error-message-color;
     font-size: $error-message-size;
     text-align: center;
-    width: 475px;
+    max-width: 410px;
 }
