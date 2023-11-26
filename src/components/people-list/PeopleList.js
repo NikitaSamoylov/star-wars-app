@@ -4,6 +4,8 @@ import PeopleItem from "../people-item/PeopleItem";
 import Preloader from "../preloader/Preloader";
 import OnError from "../error/Error";
 import PersonInfo from "../person-info/PersonInfo";
+import ErrorBoundary from "../error-boundary/error-boundary-image/ErrorBoundary";
+import ErrorBoundaryMsg from "../error-boundary/error-boundary-msg/ErrorBoundaryMsg";
 
 import './people-list.scss';
 
@@ -24,8 +26,8 @@ class PeopleList extends Component {
 
     componentDidMount() {
         this.peopleListResponse.getPeopleData()
-        .then(this.renderElements)
-        .catch(this.catchError)
+            .then(this.renderElements)
+            .catch(this.catchError)
     }
 
     catchError = () => {
@@ -51,17 +53,18 @@ class PeopleList extends Component {
             }
         )
         this.peopleListResponse.getPersonInfo(id)
-        .then(this.renderCurrentPerson)
+            .then(this.renderCurrentPerson)
+            .catch(this.catchError)
     }
 
     renderCurrentPerson = (currentPerson) => {
-        this.setState(
+        this.setState (
             {
                 currentPerson,
                 currentPersonLoading: false,
                 loadingMessage: 'The character found, try another one',
             }
-            )
+        )
     }
 
     render() {
@@ -89,13 +92,18 @@ class PeopleList extends Component {
                         </ul>
                     </div>
                     <div className="main-info-right-block">
+                        {spinner || isError    
+                                                ? null
+                                                : <ErrorBoundaryMsg>
+                                                    <h3 className="main-info-right-title">{loadingMessage}</h3>
+                                                </ErrorBoundaryMsg>}
                         {spinner || isError
                                             ? null
-                                            : <h3 className="main-info-right-title">{loadingMessage}</h3>}
-                        {spinner || isError
-                                            ? null
-                                            : <PersonInfo data={currentPerson}
-                                                            currentPersonLoading={currentPersonLoading} />}
+                                            : <ErrorBoundary>
+                                                <PersonInfo data={currentPerson}
+                                                            currentPersonLoading={currentPersonLoading} />
+                                            </ErrorBoundary>}
+                                            
                     </div>
                 </div>
             </section>

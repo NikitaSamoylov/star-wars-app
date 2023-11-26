@@ -19,7 +19,7 @@ class AppServices {
     }
 
     getPersonInfo = async (id) => {
-        const finishedData = await this.getResources(`https://swapi.dev/api/people/${id}`);
+        const finishedData = await this.getResources(`https://wapi.dev/api/people/${id}`);
         let newFilmArr = [];
         for (let personData of finishedData.films) {
             let fetchData = await this.getResources(personData)
