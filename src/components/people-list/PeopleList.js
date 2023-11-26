@@ -40,6 +40,10 @@ class PeopleList extends Component {
     }
 
     choosePerson = (id) => {
+        if (this.state.currentPerson.length !== 0
+            && this.state.currentPerson.id === id) {
+            return;
+        }
         this.setState (
             {
                 currentPersonLoading: true,
@@ -65,11 +69,11 @@ class PeopleList extends Component {
         const elements = data.map((elem) => {
             const id = elem.image.match(/[0-9]/gm).join('');
             return <PeopleItem
-                            key={id}
-                            name={elem.name}
-                            image={elem.image}
-                            clickItem={() => this.choosePerson(id)}
-                            />
+                        key={id}
+                        name={elem.name}
+                        image={elem.image}
+                        clickItem={() => this.choosePerson(id)}
+                    />
         })
         const spinner = loading ? <Preloader/> : null;
         const isError = error ? <OnError/> : null;
