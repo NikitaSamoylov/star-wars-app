@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { useState, useEffect } from "react";
 import AppServices from "../../services/AppServices";
 import PeopleItem from "../people-item/PeopleItem";
 import Preloader from "../preloader/Preloader";
@@ -7,128 +7,126 @@ import PersonInfo from "../person-info/PersonInfo";
 
 import './people-list.scss';
 
-class PeopleList extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            data: [],
-            currentPage: 1,
-            loading: true,
-            error: false,
-            currentPerson: [],
-            currentPersonLoading: true,
-            loadingMessage: 'Choose the person from left',
-            btnDisabled: false,
-        };
+const PeopleList = () => {
+    const [data, setData] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
+    const [currentPerson, setCurrentPerson] = useState([]);
+    const [currentPersonLoading, setCurrentPersonLoading] = useState(true);
+    const [loadingMessage, setLoadingMessage] = useState('Choose the person from left');
+    const [peopleCardsEnd, setPeopleCardsEnd] = useState(false);
+    const [btnDisabled, setBtnDisabled] = useState(false);
+
+
+    const peopleListResponse = new AppServices();
+
+    useEffect(() => {
+        loadPersonData();
+    }, []);
+
+    const loadPersonData = () => {
+        setCurrentPage(currentPage + 1);
+        setBtnDisabled(true);
+
+        peopleListResponse.getPeopleData(currentPage)
+            .then(renderElements)
+            .catch(catchError)
     }
 
-    peopleListResponse = new AppServices()
-
-    componentDidMount() {
-        this.loadPersonData()
+    const catchError = () => {
+        setLoading(false);
+        setError(true);
+        setData([]);
     }
 
-    loadPersonData = () => {
-        this.setState({
-            currentPage: this.state.currentPage + 1,
-            btnDisabled: true,
-        })
-        this.peopleListResponse.getPeopleData(this.state.currentPage)
-            .then(this.renderElements)
-            .catch(this.catchError)
+    const renderElements = (newData) => {
+        if (newData.length < 9) {
+            setPeopleCardsEnd(true)
+        }
+
+        setData(data => [...data, ...newData])
+        setBtnDisabled(false);
+        setLoading(false);
     }
 
-    catchError = () => {
-        this.setState({
-            loading: false,
-            error: true,
-            data: []
-        })
-    }
-
-    renderElements = (newData) => {
-        this.setState (({data}) => ({
-            data: [...data, ...newData],
-            btnDisabled: false,
-            loading: false
-        }))
-    }
-
-    choosePerson = (id) => {
-        if (this.state.currentPerson.length !== 0
-            && this.state.currentPerson.id === id) {
+    const choosePerson = (id, current) => {
+        if (currentPerson.length !== 0
+            && currentPerson.id === id) {
             return;
         }
-        this.setState (
-            {
-                currentPersonLoading: true,
-                loadingMessage: 'Intergalactic search has begun',
+
+        setData(data.map((el) => {
+            if (el.name === current.textContent) {
+                return {...el, isActive: true}
+            } else {
+                return {...el, isActive: false}
             }
-        )
-        this.peopleListResponse.getPersonInfo(id)
-            .then(this.renderCurrentPerson)
-            .catch(this.catchError)
+        }))
+        setCurrentPersonLoading(true);
+        setLoadingMessage('Intergalactic search has begun');
+        peopleListResponse.getPersonInfo(id)
+            .then(renderCurrentPerson)
+            .catch(catchError)
     }
 
-    renderCurrentPerson = (currentPerson) => {
-        this.setState (
-            {
-                currentPerson,
-                currentPersonLoading: false,
-                loadingMessage: 'The character found, try another one',
-            }
-        )
+    const renderCurrentPerson = (currentPerson) => {
+        setCurrentPerson(currentPerson);
+        setCurrentPersonLoading(false);
+        setLoadingMessage('The character found, try another one');
     }
 
-    render() {
-        const {data, loading, error, loadingMessage, currentPerson, currentPersonLoading, btnDisabled} = this.state;
-        const elements = data.map((elem) => {
-            const id = elem.image.match(/[0-9]/gm).join('');
-            return <PeopleItem
-                        key={id}
-                        name={elem.name}
-                        image={elem.image}
-                        clickItem={() => this.choosePerson(id)}
-                    />
-        })
-        const spinner = loading ? <Preloader/> : null;
-        const isError = error ? <OnError/> : null;
-        const personMessageView = spinner || isError    
-                                                    ? null
-                                                    : <h3 className="main-info-right-title">{loadingMessage}</h3>
-        const personView = spinner || isError
+    const elements = data.map((elem) => {
+        const id = elem.image.match(/[0-9]/gm).join('');
+        return <PeopleItem
+                    key={id}
+                    name={elem.name}
+                    image={elem.image}
+                    isActive={elem.isActive}
+                    clickItem={(e) => choosePerson(id, e.currentTarget)}
+                />
+    })
+    const spinner = loading ? <Preloader/> : null;
+    const isError = error ? <OnError/> : null;
+    const personMessageView = spinner
+                                || isError    
                                             ? null
-                                            : <PersonInfo data={currentPerson}
-                                                            currentPersonLoading={currentPersonLoading} />
-        const cardButton = spinner || isError
-                                            ? null
-                                            : <button className="button 
-                                                                people-list__button
-                                                                button--card"
-                                                                onClick={this.loadPersonData}
-                                                                disabled={btnDisabled}>
-                                                                    Load more
-                                            </button>;
+                                            : <h3 className="main-info-right-title">{loadingMessage}</h3>
+    const personView = spinner
+                        || isError
+                                    ? null
+                                    : <PersonInfo data={currentPerson}
+                                                    currentPersonLoading={currentPersonLoading} />
+    const cardButton = spinner
+                        || isError
+                                    ? null
+                                    : <button className="button 
+                                                        people-list__button
+                                                        button--card"
+                                                style={{display: peopleCardsEnd ? 'none' : 'block'}}
+                                                onClick={loadPersonData}
+                                                disabled={btnDisabled}>
+                                                    Load more
+                                    </button>;
 
-        return (
-            <section className="main-info">
-                <div className="container main-info__container">
-                    <div className="main-info__all">
-                        <ul className="people-list">
-                            {spinner}
-                            {isError}  
-                            {elements}
-                        </ul>
-                        {cardButton}
-                    </div>
-                    <div className="main-info-right-block">
-                        {personMessageView}
-                        {personView}
-                    </div>
+    return (
+        <section className="main-info">
+            <div className="container main-info__container">
+                <div className="main-info__all">
+                    <ul className="people-list">
+                        {spinner}
+                        {isError}  
+                        {elements}
+                    </ul>
+                    {cardButton}
                 </div>
-            </section>
-        )
-    }
+                <div className="main-info-right-block">
+                    {personMessageView}
+                    {personView}
+                </div>
+            </div>
+        </section>
+    )
 }
 
 export default PeopleList;

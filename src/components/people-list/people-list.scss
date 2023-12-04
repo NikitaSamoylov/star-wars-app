@@ -1,7 +1,7 @@
 @import '../../styles/vars';
 
 .main-info {
-    padding-top: 95px;
+    padding-top: 140px;
 
     &__all {
         max-width: 650px;
@@ -35,5 +35,7 @@
 }
 
 .main-info-right-block {
-    position: sticky;
+    position: fixed;
+    left: 50%;
+    transform: translate(39%);
 }

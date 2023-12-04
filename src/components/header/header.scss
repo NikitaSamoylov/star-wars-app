@@ -4,13 +4,17 @@
     position: fixed;
     z-index: 4;
     width: 100%;
-    padding-top: 51px;
+    padding-top: 32px;
     padding-bottom: 21px;
 
     &__container {
         display: flex;
         align-items: center;
         justify-content: space-between;
+    }
+    &--scroll {
+        background-color: #09090b;
+        transition: .1s;
     }
 }
 
