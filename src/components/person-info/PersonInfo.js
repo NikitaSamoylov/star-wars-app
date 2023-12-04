@@ -1,50 +1,47 @@
-import { Component } from 'react';
 import Skeleton from '../skeleton/Skeleton';
 
 import './person-info.scss';
 
-class PersonInfo extends Component {
+const PersonInfo = (props) => {
+    const {image, name, birth, height, homeworld, mass, films, starships} = props.data
+    const {currentPersonLoading} = props;
 
-    render() {
-        const {image, name, birth, height, homeworld, mass, films, starships} = this.props.data
-        const {currentPersonLoading} = this.props;
+    const filmsItems = Array.isArray(films)
+                        && films.length > 0
+                                            ? films.map((elem, index) => {
+                                                return (
+                                                    <li key={index}
+                                                        className="specific-list__item film-list__item">
+                                                            {elem.title}
+                                                    </li>
+                                                )
+                                            })
+                                            : <li className="specific-list__item film-list__item">
+                                                    no films
+                                              </li>
 
-        const filmsItems = Array.isArray(films)
-                            && films.length > 0
-                                                ?   films.map((elem, index) => {
+    const starshipsItems = Array.isArray(starships)
+                            && starships.length > 0
+                                                    ? starships.map((elem, index) => {
                                                         return (
                                                             <li key={index}
-                                                                className="specific-list__item film-list__item">
-                                                                    {elem.title}
+                                                            className="specific-list__item starship-list__item">
+                                                                {elem.name} 
                                                             </li>
                                                         )
-                                                })
-                                                :   <li className="specific-list__item film-list__item">
-                                                        no films
-                                                    </li>
+                                                    })
+                                                    : <li className="specific-list__item starship-list__item">
+                                                        no starships
+                                                      </li>
 
-        const starshipsItems = Array.isArray(starships)
-                                && starships.length > 0
-                                                        ?   starships.map((elem, index) => {
-                                                                return (
-                                                                    <li key={index}
-                                                                    className="specific-list__item starship-list__item">
-                                                                        {elem.name} 
-                                                                    </li>
-                                                                )
-                                                        })  : <li className="specific-list__item starship-list__item">
-                                                                no starships
-                                                            </li>
+    return (
+        <div className='main-info__specific-info specific-info'>
+            {currentPersonLoading
+                                ? <Skeleton data='pick info'/>
+                                : View(image, height, name, mass, birth, homeworld, filmsItems, starshipsItems)}
 
-        return (
-            <div className='main-info__specific-info specific-info'>
-                {currentPersonLoading
-                                    ? <Skeleton data='pick info'/>
-                                    : View(image, height, name, mass, birth, homeworld, filmsItems, starshipsItems)}
-
-            </div>
-        )
-    }
+        </div>
+    )
 }
 
 const View = (image, height, name, mass, birth, homeworld, filmsItems, starshipsItems) => {
