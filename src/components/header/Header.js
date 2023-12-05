@@ -30,11 +30,17 @@ const Header = () =>  {
                     tabIndex={1}/></a>
                 <ul className="nav">
                     <li className="nav__item nav__item--active"
-                        tabIndex={2}>Characters</li>
+                        tabIndex={2}>
+                            Characters
+                    </li>
                     <li className="nav__item"
-                        tabIndex={3}>Films</li>
+                        tabIndex={3}>
+                            Films
+                    </li>
                     <li className="nav__item"
-                        tabIndex={4}>Starships</li>
+                        tabIndex={4}>
+                            Starships
+                    </li>
                 </ul>
             </div>
         </header>

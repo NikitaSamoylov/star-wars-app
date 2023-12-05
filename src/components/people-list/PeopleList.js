@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import AppServices from "../../services/AppServices";
 import PeopleItem from "../people-item/PeopleItem";
 import Preloader from "../preloader/Preloader";
@@ -8,31 +8,32 @@ import PersonInfo from "../person-info/PersonInfo";
 import './people-list.scss';
 
 const PeopleList = () => {
+    console.log('render PeopleList')
     const [data, setData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
     const [currentPerson, setCurrentPerson] = useState([]);
     const [currentPersonLoading, setCurrentPersonLoading] = useState(true);
-    const [loadingMessage, setLoadingMessage] = useState('Choose the person from left');
     const [peopleCardsEnd, setPeopleCardsEnd] = useState(false);
     const [btnDisabled, setBtnDisabled] = useState(false);
 
+    const messageRef = useRef('Choose the person from left');
 
-    const peopleListResponse = new AppServices();
+    const {getPeopleData, getPersonInfo} = AppServices();
 
     useEffect(() => {
         loadPersonData();
     }, []);
 
-    const loadPersonData = () => {
+    const loadPersonData = useCallback(() => {
         setCurrentPage(currentPage + 1);
         setBtnDisabled(true);
 
-        peopleListResponse.getPeopleData(currentPage)
+        getPeopleData(currentPage)
             .then(renderElements)
             .catch(catchError)
-    }
+    }, [data]);
 
     const catchError = () => {
         setLoading(false);
@@ -64,8 +65,8 @@ const PeopleList = () => {
             }
         }))
         setCurrentPersonLoading(true);
-        setLoadingMessage('Intergalactic search has begun');
-        peopleListResponse.getPersonInfo(id)
+        messageRef.current = 'Intergalactic search has begun'
+        getPersonInfo(id)
             .then(renderCurrentPerson)
             .catch(catchError)
     }
@@ -73,7 +74,7 @@ const PeopleList = () => {
     const renderCurrentPerson = (currentPerson) => {
         setCurrentPerson(currentPerson);
         setCurrentPersonLoading(false);
-        setLoadingMessage('The character found, try another one');
+        messageRef.current = 'The character found, try another one';
     }
 
     const elements = data.map((elem) => {
@@ -91,7 +92,7 @@ const PeopleList = () => {
     const personMessageView = spinner
                                 || isError    
                                             ? null
-                                            : <h3 className="main-info-right-title">{loadingMessage}</h3>
+                                            : <h3 className="main-info-right-title">{messageRef.current}</h3>
     const personView = spinner
                         || isError
                                     ? null

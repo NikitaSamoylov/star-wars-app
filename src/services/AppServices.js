@@ -1,5 +1,9 @@
-class AppServices {
-    getResources = async (url) => {
+// import { useCallback, useState } from "react";
+
+const AppServices = () => {
+    // const [respData, setRespData] = useState(null);
+
+    const getResources = async(url) => {
         let res = await fetch(url)
         if (!res.ok) {
             throw new Error (`Could not fetch ${url}, status ${res.status}`);
@@ -8,9 +12,11 @@ class AppServices {
         return await res.json();
     }
 
-    getPeopleData = async (page=1) => {
-        const finishedData = await this.getResources(`https://swapi.dev/api/people/?page=${page}`);
+    const getPeopleData = async(page=1) => {
+        console.log('list data render')
+        const finishedData = await getResources(`https://swapi.dev/api/people/?page=${page}`);
         return finishedData.results.map((data) => {
+            // setRespData(data)
             return {
                 name: data.name,
                 image: `https://starwars-visualguide.com/assets/img/characters/${data.url.match(/[0-9]/gm).join('')}.jpg`,
@@ -19,21 +25,21 @@ class AppServices {
         }).splice(0, 9)
     }
 
-    getPersonInfo = async (id) => {
-        const finishedData = await this.getResources(`https://swapi.dev/api/people/${id}`);
+    const getPersonInfo = async (id) => {
+        console.log('person info render')
+        const finishedData = await getResources(`https://swapi.dev/api/people/${id}`);
         let newFilmArr = [];
         for (let personData of finishedData.films) {
-            let fetchData = await this.getResources(personData)
+            let fetchData = await getResources(personData)
             newFilmArr.push(fetchData)
         }
         let newStarshipsArr = [];
         for (let personData of finishedData.starships) {
-            let fetchData = await this.getResources(personData)
+            let fetchData = await getResources(personData)
             newStarshipsArr.push(fetchData)
         }
-        let homeWorldResp = await this.getResources(finishedData.homeworld);
+        let homeWorldResp = await getResources(finishedData.homeworld);
         let homeWorld = homeWorldResp.name;
-        
 
         return {
             id: id,
@@ -46,6 +52,11 @@ class AppServices {
             films: newFilmArr,
             starships: newStarshipsArr,
         }
+    }
+
+    return {
+        getPeopleData,
+        getPersonInfo,
     }
 }
 
