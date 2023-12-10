@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import AppServices from "../../services/AppServices";
 import PeopleItem from "../people-item/PeopleItem";
 import Preloader from "../preloader/Preloader";
@@ -8,7 +8,6 @@ import PersonInfo from "../person-info/PersonInfo";
 import './people-list.scss';
 
 const PeopleList = () => {
-    console.log('render PeopleList')
     const [data, setData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [loading, setLoading] = useState(true);
@@ -26,14 +25,14 @@ const PeopleList = () => {
         loadPersonData();
     }, []);
 
-    const loadPersonData = useCallback(() => {
+    const loadPersonData = () => {
         setCurrentPage(currentPage + 1);
         setBtnDisabled(true);
 
         getPeopleData(currentPage)
             .then(renderElements)
             .catch(catchError)
-    }, [data]);
+    };
 
     const catchError = () => {
         setLoading(false);
@@ -64,8 +63,9 @@ const PeopleList = () => {
                 return {...el, isActive: false}
             }
         }))
+
         setCurrentPersonLoading(true);
-        messageRef.current = 'Intergalactic search has begun'
+        messageRef.current = 'Intergalactic search has begun';
         getPersonInfo(id)
             .then(renderCurrentPerson)
             .catch(catchError)
@@ -111,22 +111,20 @@ const PeopleList = () => {
                                     </button>;
 
     return (
-        <section className="main-info">
-            <div className="container main-info__container">
-                <div className="main-info__all">
-                    <ul className="people-list">
-                        {spinner}
-                        {isError}  
-                        {elements}
-                    </ul>
-                    {cardButton}
-                </div>
-                <div className="main-info-right-block">
-                    {personMessageView}
-                    {personView}
-                </div>
+        <>
+            <div className="main-info__all">
+                <ul className="people-list">
+                    {spinner}
+                    {isError}  
+                    {elements}
+                </ul>
+                {cardButton}
             </div>
-        </section>
+            <div className="main-info-right-block">
+                {personMessageView}
+                {personView}
+            </div>
+        </>
     )
 }
 

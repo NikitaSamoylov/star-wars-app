@@ -1,0 +1,21 @@
+@import '../../styles/vars';
+
+.content-item {
+    &:hover {
+        transform: scale(1.05);
+    }
+    transition: .3s;
+
+    &__img {
+        display: block;
+        border-radius: 10px;
+        width: 300px;
+        height: auto;
+        margin-bottom: 13px;
+        cursor: pointer;
+    }
+    &__title {
+        font-size: $film-title-size;
+        color: $film-title-color;
+    }
+}

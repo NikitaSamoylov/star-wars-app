@@ -1,7 +1,4 @@
-// import { useCallback, useState } from "react";
-
 const AppServices = () => {
-    // const [respData, setRespData] = useState(null);
 
     const getResources = async(url) => {
         let res = await fetch(url)
@@ -13,10 +10,8 @@ const AppServices = () => {
     }
 
     const getPeopleData = async(page=1) => {
-        console.log('list data render')
         const finishedData = await getResources(`https://swapi.dev/api/people/?page=${page}`);
         return finishedData.results.map((data) => {
-            // setRespData(data)
             return {
                 name: data.name,
                 image: `https://starwars-visualguide.com/assets/img/characters/${data.url.match(/[0-9]/gm).join('')}.jpg`,
@@ -26,9 +21,9 @@ const AppServices = () => {
     }
 
     const getPersonInfo = async (id) => {
-        console.log('person info render')
         const finishedData = await getResources(`https://swapi.dev/api/people/${id}`);
         let newFilmArr = [];
+        
         for (let personData of finishedData.films) {
             let fetchData = await getResources(personData)
             newFilmArr.push(fetchData)
@@ -54,9 +49,23 @@ const AppServices = () => {
         }
     }
 
+    const getFilmsList = async () => {
+        const data = await getResources('https://swapi.dev/api/films/');
+        return data.results.map((elem) => {
+            const id = elem.url.match(/[0-9]/gm).join('');
+            return {
+                id: id,
+                title: elem.title,
+                filmsImg: `https://starwars-visualguide.com/assets/img/films/${id}.jpg`,
+                isActive: false,
+            }
+        })
+    }
+
     return {
         getPeopleData,
         getPersonInfo,
+        getFilmsList
     }
 }
 

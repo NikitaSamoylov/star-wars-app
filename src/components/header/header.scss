@@ -22,7 +22,7 @@
     display: flex;
     align-items: center;
 
-    &__item {
+    &__item-link {
         font-size: 2rem;
         color: $disabled-nav-color;
         transition: .2s;
@@ -31,7 +31,7 @@
             color: $active-nav-color;
         }
     }
-    &__item:hover {
+    &__item-link:hover {
         color: $hover-nav-color;
     }
     &__item:not(:last-child) {
