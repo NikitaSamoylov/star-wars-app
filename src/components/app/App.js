@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from '../header/Header';
-import { MainPage, FilmsPage } from '../pages';
+import { MainPage, FilmsPage, Page404 } from '../pages';
 
 import './app.scss';
 
@@ -14,6 +14,7 @@ const App = () => {
             <Routes>
               <Route path="/" element={<MainPage/>} />
               <Route path="/films" element={<FilmsPage/>} />
+              <Route path="*" element={<Page404/>} />
             </Routes>
           </div>
         </section>
