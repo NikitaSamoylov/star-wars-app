@@ -32,18 +32,18 @@ const FilmsList = () => {
 
     const filmsElements = films.map((el) => {
         const {id, ...itemProps} = el;
-        return <FilmsItem key={id} {...itemProps} />
+        return <FilmsItem key={id} {...itemProps} id={id} />
     })
 
     const spinner = loading ? <Preloader/> : null;
     const isError = error ? <OnError/> : null
 
     return (
-        <div className="main-info__content info-content">
+        <ul className="main-info__content info-content">
             {spinner}
             {isError}
             {filmsElements}
-        </div>
+        </ul>
     )
 }  
 

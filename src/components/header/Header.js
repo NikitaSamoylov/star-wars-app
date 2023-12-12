@@ -39,10 +39,9 @@ const Header = () =>  {
                         </NavLink>
                     </li>
                     <li className="nav__item" tabIndex={3}>
-                        <NavLink end
-                                className="nav__item-link"
-                                to="/films"
-                                style={({isActive}) =>  ({color: isActive ? "#C5A95D" : "inherit"})}>
+                        <NavLink className="nav__item-link"
+                                    to="/films"
+                                    style={({isActive}) =>  ({color: isActive ? "#C5A95D" : "inherit"})}>
                             Films
                         </NavLink>
                     </li>

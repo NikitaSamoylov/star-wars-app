@@ -1,4 +1,4 @@
-import PeopleList from '../people-list/PeopleList';
+import PeopleList from '../../people-list/PeopleList';
 
 const MainPage = () => {
     return (

@@ -1,4 +1,4 @@
-import FilmsList from '../films-list/FilmsList';
+import FilmsList from '../../films-list/FilmsList';
 
 const FilmsPage = () => {
     return (

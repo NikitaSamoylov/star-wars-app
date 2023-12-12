@@ -62,10 +62,22 @@ const AppServices = () => {
         })
     }
 
+    const getChoosenFilm = async (id) => {
+        const data = await getResources(`https://swapi.dev/api/films/${id}`);
+        return {
+            title: data.title,
+            descr: data.opening_crawl,
+            release: data.release_date,
+            poster: `https://starwars-visualguide.com/assets/img/films/${id}.jpg`,
+        }
+
+    }
+
     return {
         getPeopleData,
         getPersonInfo,
-        getFilmsList
+        getFilmsList,
+        getChoosenFilm
     }
 }
 

@@ -1,0 +1,29 @@
+@import '../../../styles/vars';
+
+.film-info {
+
+    &__img {
+        margin-right: 15px;
+        border-radius: 10px;
+    }
+}
+
+.film-content {
+    display: block;
+
+    &__title {
+        color: $choosen-item-title-color;
+        font-size: $choosen-item-size;
+        margin-bottom: 25px;
+    }
+    &__descr {
+        max-width: 550px;
+        font-size: $paragraph-size;
+        margin-bottom: 15px;
+    }
+    &__btn {
+        font-size: $paragraph-size;
+        cursor: pointer;
+        color: grey;
+    }
+}
