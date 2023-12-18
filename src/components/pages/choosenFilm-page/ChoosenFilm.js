@@ -3,7 +3,6 @@ import { useParams, Link } from 'react-router-dom';
 import AppServices from '../../../services/AppServices';
 import Preloader from '../../preloader/Preloader';
 import OnError from '../../error/Error';
-import '../../../resources/img/x-men.png';
 import './choosen-film.scss';
 
 const ChoosenFilm = () => {
@@ -59,7 +58,7 @@ const ChoosenFilmView = (data) => {
         <p className="film-content__descr">
           {descr}
         </p>
-        <p className="film-content__descr">Release {release}</p>
+        <p className="film-content__descr">Release: {release}</p>
       </div>
       <Link to="/films" className='film-content__btn'>Back to all</Link>
     </>

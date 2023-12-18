@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import AppServices from '../../services/AppServices';
 import FilmsItem from '../films-item/FilmsItem';
 import Preloader from "../preloader/Preloader";
@@ -32,7 +33,11 @@ const FilmsList = () => {
 
     const filmsElements = films.map((el) => {
         const {id, ...itemProps} = el;
-        return <FilmsItem key={id} {...itemProps} id={id} />
+        return (
+            <CSSTransition timeout={500} classNames="item">
+                <FilmsItem key={id} {...itemProps} id={id} />
+            </CSSTransition>
+        )
     })
 
     const spinner = loading ? <Preloader/> : null;
@@ -42,7 +47,9 @@ const FilmsList = () => {
         <ul className="main-info__content info-content">
             {spinner}
             {isError}
-            {filmsElements}
+            <TransitionGroup component={null}>
+                {filmsElements}
+            </TransitionGroup>
         </ul>
     )
 }  

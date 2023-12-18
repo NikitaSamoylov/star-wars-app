@@ -20,16 +20,18 @@ const AppServices = () => {
         }).splice(0, 9)
     }
 
-    const getPersonInfo = async (id) => {
+    const getPersonInfo = async (id, setSearchStatusMsg) => {
         const finishedData = await getResources(`https://swapi.dev/api/people/${id}`);
         let newFilmArr = [];
         
         for (let personData of finishedData.films) {
+            setSearchStatusMsg('Getting films ...')
             let fetchData = await getResources(personData)
             newFilmArr.push(fetchData)
         }
         let newStarshipsArr = [];
         for (let personData of finishedData.starships) {
+            setSearchStatusMsg('Getting starships ...')
             let fetchData = await getResources(personData)
             newStarshipsArr.push(fetchData)
         }
