@@ -58,7 +58,6 @@ const View = (image, height, name, mass, birth, homeworld, filmsItems, starships
                     <p className="header-info__description">mass: {mass} kg</p>
                     <p className="header-info__description">born: {birth}</p>
                     <p className="header-info__description">homeworld: {homeworld}</p>
-                    <button className="button header-info__btn">Load more</button>
                 </div>
             </div>
             <h3 className="specific-info__subtitle">Films</h3>

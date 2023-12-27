@@ -2,6 +2,9 @@
 
 .specific-info {
     width: 402px;
+    padding: 27px 25px 35px 27px;
+    background-color: $card-specific-info-color;
+    border-radius: 10px;
 
     &__subtitle {
         margin-bottom: 17px;
@@ -13,7 +16,7 @@
 
 .specific-header {
     display: flex;
-    align-items: center;
+    align-items: top;
     margin-bottom: 30px;
 
     &__img {
@@ -62,6 +65,7 @@
         margin-bottom: 15px;
     }
 }
+
 
 
 

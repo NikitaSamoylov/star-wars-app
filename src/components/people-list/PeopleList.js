@@ -5,6 +5,7 @@ import PeopleItem from "../people-item/PeopleItem";
 import Preloader from "../preloader/Preloader";
 import OnError from "../error/Error";
 import PersonInfo from "../person-info/PersonInfo";
+import SearchForm from "../searchForm/SearchForm";
 
 import './people-list.scss';
 
@@ -55,14 +56,16 @@ const PeopleList = () => {
             && currentPerson.id === id) {
             return;
         }
-
-        setData(data.map((el) => {
-            if (el.name === current.textContent) {
-                return {...el, isActive: true}
-            } else {
-                return {...el, isActive: false}
-            }
-        }))
+        
+        if (current !== null) {
+            setData(data.map((el) => {
+                if (el.name === current.textContent) {
+                    return {...el, isActive: true}
+                } else {
+                    return {...el, isActive: false}
+                }
+            }))
+        }
 
         setCurrentPersonLoading(true);
         setSearchStatusMsg('Intergalactic search has begun');
@@ -132,9 +135,19 @@ const PeopleList = () => {
                 {cardButton}
             </div>
             <div className="main-info-right-block">
-            <TransitionGroup component={null}>
+            <TransitionGroup component={null} >
                 {personMessageView}
                 {personView}
+            </TransitionGroup>
+            <TransitionGroup component={null}>
+                {spinner || isError ?
+                                    null
+                                    : (
+                                        <CSSTransition classNames="item" timeout={300}>
+                                             <SearchForm choosePerson={(id, current) => choosePerson(id, current)}/>
+                                        </CSSTransition>
+                                    )
+                }
             </TransitionGroup>
             </div>
         </>

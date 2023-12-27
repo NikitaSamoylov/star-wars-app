@@ -72,14 +72,30 @@ const AppServices = () => {
             release: data.release_date,
             poster: `https://starwars-visualguide.com/assets/img/films/${id}.jpg`,
         }
+    }
 
+    const searchPerson = async (value) => {
+        const data = await getResources(`https://swapi.dev/api/people/?search=${value}`);
+        if (data.count >= 1) {
+            const id = data.results[0].url.match(/[0-9]/gm).join('');
+            return {
+                id: id,
+                name: data.results[0].name,
+            };
+        } else {
+            return {
+                id: '',
+                name: 'not found',
+            };
+        }
     }
 
     return {
         getPeopleData,
         getPersonInfo,
         getFilmsList,
-        getChoosenFilm
+        getChoosenFilm,
+        searchPerson
     }
 }
 
