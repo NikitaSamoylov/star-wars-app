@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import AppServices from '../../../services/AppServices';
 import Preloader from '../../preloader/Preloader';
@@ -36,7 +36,7 @@ const ChoosenFilm = () => {
 
   const spinner = loading ? <Preloader/> : null;
   const isError = error ? <OnError/> : null;
-  const choosenFilmRender = spinner || isError ? null : ChoosenFilmView(choosenFilm);
+  const choosenFilmRender = spinner || isError ? null : ChoosenFilmView(choosenFilm)
 
   return (
     <>
@@ -47,7 +47,7 @@ const ChoosenFilm = () => {
   )
 }
 
-const ChoosenFilmView = (data) => {
+const ChoosenFilmView = (data, navigate) => {
   const {title, descr, release, poster} = data;
 
   return (
@@ -60,7 +60,7 @@ const ChoosenFilmView = (data) => {
         </p>
         <p className="film-content__descr">Release: {release}</p>
       </div>
-      <Link to="/films" className='film-content__btn'>Back to all</Link>
+      <Link to={'/films'} className='film-content__btn'>Look at all films</Link>
     </>
   )
 }

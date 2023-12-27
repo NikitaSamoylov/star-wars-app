@@ -15,14 +15,21 @@ const FilmsList = () => {
     const {getFilmsList} = AppServices();
 
     useEffect(() => {
-        getFilmsList()
-            .then(onFilmsLoaded)
-            .catch(onCatchError)
+        if (window.sessionStorage.getItem('savedFilms') !== null) {
+            
+            const getSavedFilms = JSON.parse(window.sessionStorage.getItem('savedFilms'));
+            onFilmsLoaded(getSavedFilms);
+        } else {
+            getFilmsList()
+                .then(onFilmsLoaded)
+                .catch(onCatchError)
+        }
     }, []);
 
     const onFilmsLoaded = (data) => {
         setFilms(data);
         setLoading(false);
+        window.sessionStorage.setItem('savedFilms', JSON.stringify(data))
     }
 
     const onCatchError = () => {

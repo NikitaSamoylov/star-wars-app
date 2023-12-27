@@ -23,7 +23,16 @@ const PeopleList = () => {
     const {getPeopleData, getPersonInfo} = AppServices();
 
     useEffect(() => {
-        loadPersonData();
+        if (window.sessionStorage.getItem('currPerson') !== null) {
+            const savedPerson = window.sessionStorage.getItem('currPerson');
+            renderCurrentPerson(JSON.parse(savedPerson))
+        }
+        if (window.sessionStorage.getItem('savedPersons') !== null) {
+            const savedData = window.sessionStorage.getItem('savedPersons');
+            renderElements(JSON.parse(savedData));
+        } else {
+            loadPersonData();
+        }
     }, []);
 
     const loadPersonData = () => {
@@ -45,10 +54,11 @@ const PeopleList = () => {
         if (newData.length < 9) {
             setPeopleCardsEnd(true)
         }
-
+        const fullData = [...data, ...newData]
         setData(data => [...data, ...newData])
         setBtnDisabled(false);
         setLoading(false);
+        window.sessionStorage.setItem('savedPersons', JSON.stringify(fullData));
     }
 
     const choosePerson = (id, current) => {
@@ -78,18 +88,19 @@ const PeopleList = () => {
         setCurrentPerson(currentPerson);
         setCurrentPersonLoading(false);
         setSearchStatusMsg('The character found, try another one');
+        window.sessionStorage.setItem('currPerson', JSON.stringify(currentPerson))
     }
 
-    const elements = data.map((elem) => {
+    const elements = data.map((elem, i) => {
         const id = elem.image.match(/[0-9]/gm).join('');
         return (
             <CSSTransition timeout={500} classNames="item">
                 <PeopleItem
-                        key={id}
-                        name={elem.name}
-                        image={elem.image}
-                        isActive={elem.isActive}
-                        clickItem={(e) => choosePerson(id, e.currentTarget)}
+                    key={i}
+                    name={elem.name}
+                    image={elem.image}
+                    isActive={elem.isActive}
+                    clickItem={(e) => choosePerson(id, e.currentTarget)}
                 />
             </CSSTransition>
         )
@@ -97,30 +108,30 @@ const PeopleList = () => {
     const spinner = loading ? <Preloader/> : null;
     const isError = error ? <OnError/> : null;
     const personMessageView = spinner || isError    
-                                                ? null
-                                                : (
-                                                    <CSSTransition classNames="item" timeout={300}>
-                                                        <h3 className="main-info-right-title">{searchStatusMsg}</h3>
-                                                    </CSSTransition>
-                                                )
+        ? null
+        : (
+            <CSSTransition classNames="item" timeout={300}>
+                <h3 className="main-info-right-title">{searchStatusMsg}</h3>
+            </CSSTransition>
+        )
     const personView = spinner || isError
-                                        ? null
-                                        : (
-                                            <CSSTransition classNames="item" timeout={300}>
-                                                <PersonInfo data={currentPerson}
-                                                                currentPersonLoading={currentPersonLoading} />
-                                            </CSSTransition>
-                                        )
+        ? null
+        : (
+            <CSSTransition classNames="item" timeout={300}>
+                <PersonInfo data={currentPerson}
+                                currentPersonLoading={currentPersonLoading} />
+            </CSSTransition>
+        )
     const cardButton = spinner || isError
-                                        ? null
-                                        : <button className="button 
-                                                            people-list__button
-                                                            button--card"
-                                                    style={{display: peopleCardsEnd ? 'none' : 'block'}}
-                                                    onClick={loadPersonData}
-                                                    disabled={btnDisabled}>
-                                                        Load more
-                                        </button>;
+        ? null
+        : <button className="button 
+                            people-list__button
+                            button--card"
+                    style={{display: peopleCardsEnd ? 'none' : 'block'}}
+                    onClick={loadPersonData}
+                    disabled={btnDisabled}>
+                        Load more
+        </button>;
 
     return (
         <>
@@ -140,13 +151,13 @@ const PeopleList = () => {
                 {personView}
             </TransitionGroup>
             <TransitionGroup component={null}>
-                {spinner || isError ?
-                                    null
-                                    : (
-                                        <CSSTransition classNames="item" timeout={300}>
-                                             <SearchForm choosePerson={(id, current) => choosePerson(id, current)}/>
-                                        </CSSTransition>
-                                    )
+                {spinner || isError
+                    ? null
+                    : (
+                        <CSSTransition classNames="item" timeout={300}>
+                                <SearchForm choosePerson={(id, current) => choosePerson(id, current)}/>
+                        </CSSTransition>
+                    )
                 }
             </TransitionGroup>
             </div>

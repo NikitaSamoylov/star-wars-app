@@ -31,6 +31,7 @@
 .header-info {
 
     &__title {
+        color: $specific-info-tittle-color;
         font-size: $specific-info-title-size;
         margin-bottom: 8px;
     }
@@ -52,14 +53,21 @@
     margin-bottom: 25px;
 }
 
-.specific-list {
+.film-list {
 
     &__item {
-        font-size: $paragraph-size;
         box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    }
+
+    &__link {
+        color: $specific-text-color;
+        font-size: $paragraph-size;
         padding-left: 10px;
         padding-bottom: 5px;
         text-transform: lowercase;
+    }
+    &__link:hover {
+        color: $specific-text-color-hover;
     }
     &__item:not(:last-child) {
         margin-bottom: 15px;

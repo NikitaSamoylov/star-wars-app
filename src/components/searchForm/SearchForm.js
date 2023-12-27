@@ -26,8 +26,8 @@ const SearchForm = ({choosePerson}) => {
 
     const onPersonGotten = (data) => {
         data.id
-                ? setSearchStatus(`Person found`)
-                : setSearchStatus(`Person not found`)
+            ? setSearchStatus(`Person found`)
+            : setSearchStatus(`Person not found`)
         data.id && setFoundedPerson(data)
     }
 
