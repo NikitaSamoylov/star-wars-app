@@ -20,13 +20,14 @@ const PeopleList = () => {
     const [btnDisabled, setBtnDisabled] = useState(false);
     const [searchStatusMsg, setSearchStatusMsg] = useState('Choose the person from left');
 
-    const {getPeopleData, getPersonInfo} = AppServices();
+    const { getPeopleData, getPersonInfo } = AppServices();
 
     useEffect(() => {
         if (window.sessionStorage.getItem('currPerson') !== null) {
             const savedPerson = window.sessionStorage.getItem('currPerson');
             renderCurrentPerson(JSON.parse(savedPerson))
         }
+
         if (window.sessionStorage.getItem('savedPersons') !== null) {
             const savedData = window.sessionStorage.getItem('savedPersons');
             renderElements(JSON.parse(savedData));
@@ -54,6 +55,7 @@ const PeopleList = () => {
         if (newData.length < 9) {
             setPeopleCardsEnd(true)
         }
+
         const fullData = [...data, ...newData]
         setData(data => [...data, ...newData])
         setBtnDisabled(false);
@@ -70,9 +72,9 @@ const PeopleList = () => {
         if (current !== null) {
             setData(data.map((el) => {
                 if (el.name === current.textContent) {
-                    return {...el, isActive: true}
+                    return { ...el, isActive: true }
                 } else {
-                    return {...el, isActive: false}
+                    return { ...el, isActive: false }
                 }
             }))
         }
@@ -93,14 +95,15 @@ const PeopleList = () => {
 
     const elements = data.map((elem, i) => {
         const id = elem.image.match(/[0-9]/gm).join('');
+
         return (
             <CSSTransition timeout={500} classNames="item">
                 <PeopleItem
-                    key={i}
-                    name={elem.name}
-                    image={elem.image}
-                    isActive={elem.isActive}
-                    clickItem={(e) => choosePerson(id, e.currentTarget)}
+                    key={ i }
+                    name={ elem.name }
+                    image={ elem.image }
+                    isActive={ elem.isActive }
+                    clickItem={ (e) => choosePerson(id, e.currentTarget) }
                 />
             </CSSTransition>
         )
@@ -111,51 +114,53 @@ const PeopleList = () => {
         ? null
         : (
             <CSSTransition classNames="item" timeout={300}>
-                <h3 className="main-info-right-title">{searchStatusMsg}</h3>
+                <h3 className="main-info-right-title">{ searchStatusMsg }</h3>
             </CSSTransition>
         )
+
     const personView = spinner || isError
         ? null
         : (
-            <CSSTransition classNames="item" timeout={300}>
+            <CSSTransition classNames="item" timeout={ 300 }>
                 <PersonInfo data={currentPerson}
-                                currentPersonLoading={currentPersonLoading} />
+                    currentPersonLoading={currentPersonLoading} />
             </CSSTransition>
         )
+
     const cardButton = spinner || isError
         ? null
         : <button className="button 
-                            people-list__button
-                            button--card"
-                    style={{display: peopleCardsEnd ? 'none' : 'block'}}
-                    onClick={loadPersonData}
-                    disabled={btnDisabled}>
-                        Load more
+            people-list__button
+            button--card"
+                style={{ display: peopleCardsEnd ? 'none' : 'block' }}
+                onClick={ loadPersonData }
+                disabled={ btnDisabled }>
+                    Load more
         </button>;
 
     return (
         <>
             <div className="main-info__all">
                 <ul className="people-list">
-                    {spinner}
-                    {isError}  
+                    { spinner }
+                    { isError }  
                     <TransitionGroup component={null}>
-                        {elements}
+                        { elements }
                     </TransitionGroup>
                 </ul>
-                {cardButton}
+                { cardButton }
             </div>
             <div className="main-info-right-block">
-            <TransitionGroup component={null} >
-                {personMessageView}
-                {personView}
+            <TransitionGroup component={ null } >
+                { personMessageView }
+                { personView }
             </TransitionGroup>
             <TransitionGroup component={null}>
-                {spinner || isError
+                { spinner || isError
                     ? null
                     : (
-                        <CSSTransition classNames="item" timeout={300}>
-                                <SearchForm choosePerson={(id, current) => choosePerson(id, current)}/>
+                        <CSSTransition classNames="item" timeout={ 300 }>
+                                <SearchForm choosePerson={(id, current) => choosePerson(id, current) }/>
                         </CSSTransition>
                     )
                 }

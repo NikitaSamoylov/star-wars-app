@@ -12,11 +12,10 @@ const FilmsList = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
 
-    const {getFilmsList} = AppServices();
+    const { getFilmsList } = AppServices();
 
     useEffect(() => {
         if (window.sessionStorage.getItem('savedFilms') !== null) {
-            
             const getSavedFilms = JSON.parse(window.sessionStorage.getItem('savedFilms'));
             onFilmsLoaded(getSavedFilms);
         } else {
@@ -39,10 +38,10 @@ const FilmsList = () => {
     }
 
     const filmsElements = films.map((el) => {
-        const {id, ...itemProps} = el;
+        const { id, ...itemProps } = el;
         return (
             <CSSTransition timeout={500} classNames="item">
-                <FilmsItem key={id} {...itemProps} id={id} />
+                <FilmsItem key={ id } { ...itemProps } id={ id } />
             </CSSTransition>
         )
     })
@@ -52,10 +51,10 @@ const FilmsList = () => {
 
     return (
         <ul className="main-info__content info-content">
-            {spinner}
-            {isError}
+            { spinner }
+            { isError }
             <TransitionGroup component={null}>
-                {filmsElements}
+                { filmsElements }
             </TransitionGroup>
         </ul>
     )

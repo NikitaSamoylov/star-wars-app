@@ -17,12 +17,12 @@ const App = () => {
         <Header/>
         <section className="main-info">
           <div className="container main-info__container">
-            <Suspense fallback={<Preloader/>}>
+            <Suspense fallback={ <Preloader/> }>
               <Routes>
-                <Route path="/" element={<MainPage/>} />
-                <Route path="/films" element={<FilmsPage/>} />
-                <Route path="/films/:filmId" element={<ChoosenFilm/>} />
-                <Route path="*" element={<Page404/>} />
+                <Route path="/" element={ <MainPage/> } />
+                <Route path="/films" element={ <FilmsPage/> } />
+                <Route path="/films/:filmId" element={ <ChoosenFilm/> } />
+                <Route path="*" element={ <Page404/> } />
               </Routes>
             </Suspense>
           </div>

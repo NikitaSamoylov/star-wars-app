@@ -3,7 +3,7 @@ const AppServices = () => {
     const getResources = async(url) => {
         let res = await fetch(url)
         if (!res.ok) {
-            throw new Error (`Could not fetch ${url}, status ${res.status}`);
+            throw new Error (`Could not fetch ${ url }, status ${ res.status }`);
         }
         
         return await res.json();
@@ -20,21 +20,23 @@ const AppServices = () => {
         }).splice(0, 9)
     }
 
-    const getPersonInfo = async (id, setSearchStatusMsg) => {
+    const getPersonInfo = async(id, setSearchStatusMsg) => {
         const finishedData = await getResources(`https://swapi.dev/api/people/${id}`);
+
         let newFilmArr = [];
-        
         for (let personData of finishedData.films) {
             setSearchStatusMsg('Getting films ...')
             let fetchData = await getResources(personData)
             newFilmArr.push(fetchData)
         }
+
         let newStarshipsArr = [];
         for (let personData of finishedData.starships) {
             setSearchStatusMsg('Getting starships ...')
             let fetchData = await getResources(personData)
             newStarshipsArr.push(fetchData)
         }
+
         let homeWorldResp = await getResources(finishedData.homeworld);
         let homeWorld = homeWorldResp.name;
 
@@ -51,8 +53,9 @@ const AppServices = () => {
         }
     }
 
-    const getFilmsList = async () => {
+    const getFilmsList = async() => {
         const data = await getResources('https://swapi.dev/api/films/');
+
         return data.results.map((elem) => {
             const id = elem.url.match(/[0-9]/gm).join('');
             return {
@@ -64,8 +67,9 @@ const AppServices = () => {
         })
     }
 
-    const getChoosenFilm = async (id) => {
+    const getChoosenFilm = async(id) => {
         const data = await getResources(`https://swapi.dev/api/films/${id}`);
+
         return {
             title: data.title,
             descr: data.opening_crawl,
@@ -74,8 +78,9 @@ const AppServices = () => {
         }
     }
 
-    const searchPerson = async (value) => {
+    const searchPerson = async(value) => {
         const data = await getResources(`https://swapi.dev/api/people/?search=${value}`);
+
         if (data.count >= 1) {
             const id = data.results[0].url.match(/[0-9]/gm).join('');
             return {
@@ -95,7 +100,7 @@ const AppServices = () => {
         getPersonInfo,
         getFilmsList,
         getChoosenFilm,
-        searchPerson
+        searchPerson,
     }
 }
 
