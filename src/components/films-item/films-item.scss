@@ -1,21 +1,17 @@
 @import '../../styles/vars';
 
 .content-item {
-    &:hover {
-        transform: scale(1.05);
-    }
-    transition: .3s;
+  position: relative;
+  border-radius: 10px;
+  transition: .3s;
+  cursor: pointer;
+  padding: 25px;
+  background-color: #1D1A21;
+  opacity: 0.7;
+  margin-bottom: 20px;
 
-    &__img {
-        display: block;
-        border-radius: 10px;
-        width: 300px;
-        height: auto;
-        margin-bottom: 13px;
-        cursor: pointer;
-    }
-    &__title {
-        font-size: $film-title-size;
-        color: $film-title-color;
-    }
+  &__title {
+    font-size: $film-title-size;
+    color: $film-title-color;
+  }
 }
