@@ -1,29 +1,45 @@
 @import '../../../styles/vars';
+@import '../../../styles/mixins';
 
 .film-info {
 
-    &__img {
-        margin-right: 15px;
-        border-radius: 10px;
+  &__img {
+    margin-right: 15px;
+    border-radius: 10px;
+
+    @include middle-laptop {
+      margin-right: 0;
     }
+
+    @include tablet {
+      width: 290px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
 }
 
 .film-content {
-    display: block;
+  display: block;
+  margin-bottom: 50px;
 
-    &__title {
-        color: $choosen-item-title-color;
-        font-size: $choosen-item-size;
-        margin-bottom: 25px;
-    }
-    &__descr {
-        max-width: 550px;
-        font-size: $paragraph-size;
-        margin-bottom: 15px;
-    }
-    &__btn {
-        font-size: $paragraph-size;
-        cursor: pointer;
-        color: grey;
-    }
+  &__title {
+    color: $choosen-item-title-color;
+    font-size: $choosen-item-size;
+    margin-bottom: 25px;
+  }
+
+  &__descr {
+    max-width: 550px;
+    font-size: $paragraph-size;
+    margin-bottom: 15px;
+    padding-right: 15px;
+  }
+
+  &__btn {
+    font-size: $paragraph-size;
+    cursor: pointer;
+    color: rgb(223, 220, 220);
+    border-bottom: 1px solid #dfdede;
+  }
 }

@@ -1,23 +1,37 @@
+@import '../../styles/mixins';
+@import '../../styles/vars';
+
 .info-content {
-    margin: 0 auto;
-    max-width: 950px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-row-gap: 30px;
-    grid-column-gap: 25px;
+  margin: 0 auto;
+  max-width: 950px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-row-gap: 30px;
+  grid-column-gap: 25px;
+
+  @include middle-laptop {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include laptop {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
 
 .item-enter {
-    opacity: 0;
-  }
-  .item-enter-active {
-    opacity: 1;
-    transition: opacity 500ms ease-in;
-  }
-  .item-exit {
-    opacity: 1;
-  }
-  .item-exit-active {
-    opacity: 0;
-    transition: opacity 500ms ease-in;
-  }
+  opacity: 0;
+}
+
+.item-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.item-exit {
+  opacity: 1;
+}
+
+.item-exit-active {
+  opacity: 0;
+  transition: opacity 500ms ease-in;
+}

@@ -1,41 +1,50 @@
 @import '../../styles/vars';
+@import '../../styles/mixins';
 
 .header {
-    position: fixed;
-    z-index: 4;
-    width: 100%;
-    padding-top: 32px;
-    padding-bottom: 21px;
-    transform: translate3d(0);
+  position: fixed;
+  z-index: 4;
+  width: 100%;
+  padding-top: 32px;
+  padding-bottom: 21px;
+  transform: translate3d(0);
 
-    &__container {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @include tablet {
+      flex-direction: column;
     }
-    &--scroll {
-        background-color: #09090b;
-        transition: .1s;
-    }
+  }
+
+  &--scroll {
+    background-color: #09090b;
+    transition: .1s;
+  }
 }
 
 .nav {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 
-    &__item-link {
-        font-size: 2rem;
-        color: $disabled-nav-color;
-        transition: .2s;
-        cursor: pointer;
-        &--active {
-            color: $active-nav-color;
-        }
+  &__item-link {
+    font-size: 2rem;
+    color: $disabled-nav-color;
+    transition: .2s;
+    cursor: pointer;
+
+    &--active {
+      color: $active-nav-color;
     }
-    &__item-link:hover {
-        color: $hover-nav-color;
-    }
-    &__item:not(:last-child) {
-        margin-right: 27px;
-    }
+  }
+
+  &__item-link:hover {
+    color: $hover-nav-color;
+  }
+
+  &__item:not(:last-child) {
+    margin-right: 27px;
+  }
 }

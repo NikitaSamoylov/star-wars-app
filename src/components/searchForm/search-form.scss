@@ -1,62 +1,82 @@
 @import '../../styles/vars';
+@import '../../styles/mixins';
 
 .search-form {
-    margin-top: 35px;
-    padding: 25px;
-    background-color: $form-background-color;
-    border-radius: 10px;
+  margin-top: 35px;
+  padding: 25px;
+  background-color: $form-background-color;
+  border-radius: 10px;
 
-    &__content {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-    &__title {
-        color: $form-title-color;
-        font-size: $form-title-size;
-        margin-bottom: 15px;
-    }
-    &__input {
-        max-width: 250px;
-        background-color: $form-background-input;
-        outline: none;
-        border: none;
-        padding: 8px;
-        border-radius: 5px;
-        flex-grow: 1;
-        transition: .3s;
-        font-size: 1.4rem;
-        &:focus {
-            background-color: #d1cccc;
-        }
-        &::placeholder {
-            font-size: 1.6rem;
-        }
-    }
-    &__btn {
-        margin-left: 10px;
-        padding-left: 15px;
-        padding-right: 15px;
-    }
-    &__error {
-        padding-top: 10px;
-        font-size: $form-error-size;
-        color: $form-error-color;
-    }
-    &__more {
-        color: #C5A95D;
-        font-size: 1.4rem;
-        cursor: pointer;
-    }
-    &__clear {
-        position: absolute;
-        right: 110px;
-        top: 11px;
-        background-color: transparent;
-        border: none;
-        outline: none;
-        cursor: pointer;
+  @include tablet {
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 15px;
+  }
 
+  &__content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__title {
+    color: $form-title-color;
+    font-size: $form-title-size;
+    margin-bottom: 15px;
+  }
+
+  &__input {
+    max-width: 250px;
+    background-color: $form-background-input;
+    outline: none;
+    border: none;
+    padding: 8px;
+    border-radius: 5px;
+    flex-grow: 1;
+    transition: .3s;
+    font-size: 1.4rem;
+
+    @include tablet {
+      max-width: 175px;
     }
+
+    &:focus {
+      background-color: #d1cccc;
+    }
+
+    &::placeholder {
+      font-size: 1.6rem;
+    }
+  }
+
+  &__btn {
+    margin-left: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  &__error {
+    padding-top: 10px;
+    font-size: $form-error-size;
+    color: $form-error-color;
+  }
+
+  &__more {
+    color: #C5A95D;
+    font-size: 1.4rem;
+    cursor: pointer;
+  }
+
+  &__clear {
+    position: absolute;
+    right: 110px;
+    top: 11px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+  }
 }

@@ -1,79 +1,90 @@
 @import '../../styles/vars';
+@import '../../styles/mixins';
 
 .specific-info {
-    width: 402px;
-    padding: 27px 25px 35px 27px;
-    background-color: $card-specific-info-color;
-    border-radius: 10px;
+  width: 402px;
+  padding: 27px 25px 35px 27px;
+  background-color: $card-specific-info-color;
+  border-radius: 10px;
 
-    &__subtitle {
-        margin-bottom: 17px;
-    }
-    &__films {
-        margin-bottom: 25px;
-    }
+  @include tablet {
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 15px;
+    overflow-x: hidden;
+  }
+
+  &__subtitle {
+    margin-bottom: 17px;
+  }
+
+  &__films {
+    margin-bottom: 25px;
+  }
 }
 
 .specific-header {
-    display: flex;
-    align-items: top;
-    margin-bottom: 30px;
+  display: flex;
+  align-items: top;
+  margin-bottom: 30px;
 
-    &__img {
-        display: block;
-        height: 167px;
-        width: auto;
-        border-radius: 5px;
-        margin-right: 15px;
-    }
+  &__img {
+    display: block;
+    height: 167px;
+    width: auto;
+    border-radius: 5px;
+    margin-right: 15px;
+  }
 }
 
 .header-info {
 
-    &__title {
-        color: $specific-info-tittle-color;
-        font-size: $specific-info-title-size;
-        margin-bottom: 8px;
-    }
-    &__description {
-        font-size: $paragraph-size;
-        line-height: 16.41px;
-    }
-    &__description:not(:last-of-type) {
-        margin-bottom: 4px;
-    }
-    &__description:last-of-type {
-        margin-bottom: 16px;
-    }
+  &__title {
+    color: $specific-info-tittle-color;
+    font-size: $specific-info-title-size;
+    margin-bottom: 8px;
+  }
+
+  &__description {
+    font-size: $paragraph-size;
+    line-height: 16.41px;
+  }
+
+  &__description:not(:last-of-type) {
+    margin-bottom: 4px;
+  }
+
+  &__description:last-of-type {
+    margin-bottom: 16px;
+  }
 }
 
 .info-description {
-    max-width: 378px;
-    font-size: $paragraph-size;
-    margin-bottom: 25px;
+  max-width: 378px;
+  font-size: $paragraph-size;
+  margin-bottom: 25px;
 }
 
 .film-list {
 
-    &__item {
-        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    }
+  &__item {
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  }
 
-    &__link {
-        color: $specific-text-color;
-        font-size: $paragraph-size;
-        padding-left: 10px;
-        padding-bottom: 5px;
-        text-transform: lowercase;
-    }
-    &__link:hover {
-        color: $specific-text-color-hover;
-    }
-    &__item:not(:last-child) {
-        margin-bottom: 15px;
-    }
+  &__link {
+    color: $specific-text-color;
+    font-size: $paragraph-size;
+    padding-left: 10px;
+    padding-bottom: 5px;
+    text-transform: lowercase;
+  }
+
+  &__link:hover {
+    color: $specific-text-color-hover;
+  }
+
+  &__item:not(:last-child) {
+    margin-bottom: 15px;
+  }
 }
-
-
-
-

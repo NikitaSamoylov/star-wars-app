@@ -1,69 +1,95 @@
 @import '../../styles/vars';
+@import '../../styles/mixins';
 
 .main-info {
-    padding-top: 140px;
+  padding-top: 140px;
 
-    &__all {
-        max-width: 650px;
+  &__all {
+    max-width: 650px;
+  }
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    @include big-laptop {
+      flex-direction: column-reverse;
+      align-items: center;
     }
-    &__container {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-    }
+  }
 }
 
 .people-list {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
-    margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  margin-bottom: 20px;
+
+  @include laptop {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include tablet {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
 
 .main-info-right-title {
-    position: relative;
-    top: -6px;
-    margin-bottom: 15px;
-    color: #7e7e7e;
-    padding-left: 27px;
+  position: relative;
+  top: -6px;
+  margin-bottom: 15px;
+  color: #7e7e7e;
+  padding-left: 27px;
 }
 
 .main-info-right-block {
-    position: fixed;
-    left: 50%;
-    transform: translate(39%);
-    max-height: calc(100% - 155px);
-    overflow-y: auto;
-    padding-right: 10px;
+  position: fixed;
+  left: 50%;
+  transform: translate(39%);
+  max-height: calc(100% - 155px);
+  overflow-y: auto;
+  padding-right: 10px;
+
+  @include big-laptop {
+    position: static;
+    transform: translate(0);
+    padding-right: 0;
+    left: 0;
+    z-index: 2;
+    margin-bottom: 50px;
+  }
 }
 
 .item-enter {
-    opacity: 0;
+  opacity: 0;
 }
+
 .item-enter-active {
-    opacity: 1;
-    transition: opacity 500ms ease-in;
+  opacity: 1;
+  transition: opacity 500ms ease-in;
 }
+
 .item-exit {
-    opacity: 1;
+  opacity: 1;
 }
+
 .item-exit-active {
-    opacity: 0;
-    transition: opacity 500ms ease-in;
+  opacity: 0;
+  transition: opacity 500ms ease-in;
 }
 
 //scrollbar styling
 .main-info-right-block::-webkit-scrollbar {
-    width: 10px;
-}
- 
-.main-info-right-block::-webkit-scrollbar-track {
-    background-color: #9b9b99;
-    border-radius: 100px;
-}
- 
-.main-info-right-block::-webkit-scrollbar-thumb {
-    background-color: #525250;
-    border-radius: 100px;
+  width: 10px;
 }
 
+.main-info-right-block::-webkit-scrollbar-track {
+  background-color: #9b9b99;
+  border-radius: 100px;
+}
+
+.main-info-right-block::-webkit-scrollbar-thumb {
+  background-color: #525250;
+  border-radius: 100px;
+}

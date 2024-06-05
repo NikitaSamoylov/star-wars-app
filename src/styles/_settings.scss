@@ -1,41 +1,41 @@
 * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-    font-size: 10px;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-size: 10px;
 }
 
 body {
-    margin: 0 auto;
-    background-image: $primary-bcg-image;
-    background-attachment: fixed;
-    -webkit-background-attachment: fixed;
-    background-position: top center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    font-family: $font-family-main;
-    color: #e7e6e6;
+  margin: 0 auto;
+  background-image: $primary-bcg-image;
+  background-attachment: fixed;
+  -webkit-background-attachment: fixed;
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: $font-family-main;
+  color: #e7e6e6;
+  max-width: $container-width;
 }
 
 .container {
-    width: $container-width;
-    margin: 0 auto;
+  max-width: $container-width;
+  padding: 0 15px;
 }
 
 li {
-    list-style-type: none;
+  list-style-type: none;
 }
 
 button {
-    outline: none;
-    cursor: pointer;
+  outline: none;
+  cursor: pointer;
 }
 
 h3 {
-    font-size: 1.8rem;
+  font-size: 1.8rem;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
-

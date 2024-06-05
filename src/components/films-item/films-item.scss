@@ -1,21 +1,28 @@
 @import '../../styles/vars';
+@import '../../styles/mixins';
 
 .content-item {
-    &:hover {
-        transform: scale(1.05);
-    }
-    transition: .3s;
+  &:hover {
+    transform: scale(1.05);
+  }
 
-    &__img {
-        display: block;
-        border-radius: 10px;
-        width: 300px;
-        height: auto;
-        margin-bottom: 13px;
-        cursor: pointer;
+  transition: .3s;
+
+  &__img {
+    display: block;
+    border-radius: 10px;
+    width: 300px;
+    height: auto;
+    margin-bottom: 13px;
+    cursor: pointer;
+
+    @include laptop {
+      width: 290px;
     }
-    &__title {
-        font-size: $film-title-size;
-        color: $film-title-color;
-    }
+  }
+
+  &__title {
+    font-size: $film-title-size;
+    color: $film-title-color;
+  }
 }
