@@ -1,70 +1,11 @@
-# Getting Started with Create React App
+Приложение с API Star Wars
+Задействовал технологии: React.js, Javascript, SCSS. Библиотеки: React Router, React transition group для анимаций и React Helmet для заголовков документа. Еще API “Звездных войн”.
+В приложении 3 страницы: персонажи, планеты и корабли. На главной странице - лист персонажей с подгрузкой, компонент с подробностями по персонажу и компонент с поиском по имени.
+Пользователь кликает на любого персонажа и в компоненте справа видит характеристики персонажа, фильмы с участием и корабли. Нажимает на фильм и перенаправляется на страницу с описанием фильма. Ссылка при клике на элемент списка кораблей ведет на страницу 404.
+Список персонажей и данные по персонажу сохраняются в Local Storage. Поэтому не требуется запрос к базе данных при возврате к списку персонажей. Благодаря этому интерфейс для пользователя работает быстрее.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Application with Star Wars API
+Technologies used: React.js, Javascript, SCSS. Libraries: React Router, React transition group for animations and React Helmet for document headings.
+The app contains 3 pages: characters, planets and ships. On the main page there is a list of characters with loading, a component with details on the character and a component with a search by name.
+The user clicks on any character and in the component on the right sees the characteristics of the character, films with the participation and ships. Clicks on a movie and is redirected to a page with a description of the movie. When you click on a ship list element, the link leads to a 404 page.
+The list of characters and character data are saved in Local Storage. Therefore, no database query is required when returning to the character list. This makes the user interface faster.
